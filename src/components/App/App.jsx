@@ -1,10 +1,10 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import fetchImages from '../../images-api';
-import { MagnifyingGlass } from 'react-loader-spinner';
 import SearchBar from '../SearchBar/SearchBar';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import toast, { Toaster } from 'react-hot-toast';
+import Loader from '../Loader/Loader';
 
 const notify = () => toast.error('Enter search query first.');
 
@@ -59,18 +59,7 @@ function App() {
           />
         ))
       )}
-      {isLoading && (
-        <MagnifyingGlass
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="magnifying-glass-loading"
-          wrapperStyle={{}}
-          wrapperClass="magnifying-glass-wrapper"
-          glassColor="#c0efff"
-          color="#e15b64"
-        />
-      )}
+      {isLoading && <Loader />}
       <Toaster />
     </>
   );
