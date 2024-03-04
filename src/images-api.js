@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default async function fetchImages(query, page, setImages) {
+export default async function fetchImages(query, page) {
   axios.defaults.baseURL = 'https://api.unsplash.com/';
 
   try {
@@ -15,7 +15,7 @@ export default async function fetchImages(query, page, setImages) {
       },
     });
 
-    setImages(response.data.results);
+    return response.data.results;
   } catch (error) {
     console.log(error);
   }

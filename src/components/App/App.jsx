@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import fetchImages from '../../images-api';
 import SearchBar from '../SearchBar/SearchBar';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 
@@ -18,7 +19,10 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetchImages(query, page, setImages);
+        const results = await fetchImages(query, page, setImages);
+        setImages(prevImages => {
+          return prevImages.length > 0 ? [...prevImages, ...results] : results;
+        });
       } catch (error) {
         setIsError(true);
       } finally {
@@ -33,6 +37,7 @@ function App() {
     event.preventDefault();
 
     setPage(1);
+    setImages([]);
     setIsError(false);
     setIsLoading(true);
 
@@ -42,6 +47,10 @@ function App() {
     if (!inputValue) notify();
     setQuery(inputValue);
     form.reset();
+  };
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
   };
 
   return (
@@ -60,6 +69,7 @@ function App() {
         ))
       )}
       {isLoading && <Loader />}
+      {images.length > 0 && <LoadMoreBtn onLoad={handleLoadMore} />}
       <Toaster />
     </>
   );
