@@ -1,7 +1,13 @@
-const ImageCard = () => {
+const ImageCard = ({ image, onClick }) => {
   return (
-    <div>ImageCard</div>
-  )
-}
+    <img
+      src={image.urls.small}
+      data-regular={image.regular}
+      alt={image.alt_description}
+      id={image.id}
+      onClick={onClick}
+    />
+  );
+};
 
-export default ImageCard
+export default ImageCard;

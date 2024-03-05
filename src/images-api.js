@@ -17,6 +17,6 @@ export default async function fetchImages(query, page) {
 
     return response.data.results;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 }

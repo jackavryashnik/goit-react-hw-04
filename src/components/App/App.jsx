@@ -6,6 +6,8 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
+import ImageModal from '../ImageModal/ImageModal';
+import ImageGallery from '../ImageGallery/ImageGallery';
 
 const notify = () => toast.error('Enter search query first.');
 
@@ -15,6 +17,8 @@ function App() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,24 +61,33 @@ function App() {
     setPage(page + 1);
   };
 
+  function openModal(event) {
+    setIsOpen(true);
+    setCurrentImage(images.filter(image => image.id === event.target.id));
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
     <>
       <SearchBar onSubmit={handleSubmit} />
       {isError ? (
         <ErrorMessage />
       ) : (
-        images.length > 0 &&
-        images.map(image => (
-          <img
-            key={image.id}
-            src={image.urls.smal}
-            alt={image.alt_description}
-          />
-        ))
+        images.length > 0 && (
+          <ImageGallery images={images} onClick={openModal} />
+        )
       )}
       {isLoading && <Loader />}
       {images.length > 0 && <LoadMoreBtn onLoad={handleLoadMore} />}
       <Toaster />
+      <ImageModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        image={currentImage}
+      />
     </>
   );
 }
