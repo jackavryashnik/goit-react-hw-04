@@ -39,13 +39,17 @@ function App() {
     setPage(1);
     setImages([]);
     setIsError(false);
-    setIsLoading(true);
 
     const form = event.target;
     const inputValue = form.elements.input.value;
 
-    if (!inputValue) notify();
-    setQuery(inputValue);
+    if (!inputValue.trim()) {
+      notify();
+    } else {
+      setIsLoading(true);
+    }
+
+    setQuery(inputValue.trim().toLowerCase());
     form.reset();
   };
 
