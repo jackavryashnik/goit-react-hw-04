@@ -1,12 +1,16 @@
+import css from './ImageCard.module.css';
+
 const ImageCard = ({ image, onClick }) => {
   return (
-    <img
-      src={image.urls.small}
-      data-regular={image.regular}
-      alt={image.alt_description}
-      id={image.id}
-      onClick={onClick}
-    />
+    <div className={css.imgWrapper}>
+      <img
+        src={image.urls.small}
+        data-regular={image.regular}
+        alt={image.alt_description}
+        onClick={()=> onClick(image)}
+        className={css.img}
+      />
+    </div>
   );
 };
 

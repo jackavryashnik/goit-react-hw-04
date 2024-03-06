@@ -18,7 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(null);
+  const [currentImage, setCurrentImage] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,9 +61,9 @@ function App() {
     setPage(page + 1);
   };
 
-  function openModal(event) {
+  function openModal(image) {
     setIsOpen(true);
-    setCurrentImage(images.filter(image => image.id === event.target.id));
+    setCurrentImage(image);
   }
 
   function closeModal() {
@@ -82,12 +82,20 @@ function App() {
       )}
       {isLoading && <Loader />}
       {images.length > 0 && <LoadMoreBtn onLoad={handleLoadMore} />}
-      <Toaster />
-      <ImageModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        image={currentImage}
+      <Toaster
+        toastOptions={{
+          style: {
+            marginTop: '50px',
+          },
+        }}
       />
+      {currentImage && (
+        <ImageModal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          image={currentImage}
+        />
+      )}
     </>
   );
 }

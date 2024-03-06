@@ -1,0 +1,20 @@
+.imgWrapper {
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightcyan;
+  border-radius: 8px;
+  border: 2px solid lightgray;
+  transition: scale 250ms ease-in-out;
+}
+
+.img {
+  height: auto;
+  max-height: 100%;
+}
+
+.imgWrapper:hover {
+  scale: 1.05;
+}

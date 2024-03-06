@@ -1,0 +1,16 @@
+.btn {
+    padding: 8px 16px;
+    margin: 8px auto;
+    border-radius: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: skyblue;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: lightblue;
+}

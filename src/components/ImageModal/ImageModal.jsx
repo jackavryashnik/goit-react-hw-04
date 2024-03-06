@@ -1,4 +1,7 @@
 import Modal from 'react-modal';
+// import css from './ImageModal.module.css';
+
+Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
@@ -11,14 +14,20 @@ const customStyles = {
   },
 };
 
-const ImageModal = ({ modalIsOpen, closeModal, image }) => {
+const ImageModal = ({ modalIsOpen, closeModal, image: {user, description, alt_description, imgUrl, likes} }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}
-      contentLabel={image.description}
-    />
+    >
+      {/* TODO: modal stracture
+      <p>{description}</p>
+      <p>{likes}</p>
+      <p>{alt_description}</p>
+      <p>{imgUrl}</p>
+      <p>{`${user.firs_name } ${user.last_name}`}</p> */}
+    </Modal>
   );
 };
 
