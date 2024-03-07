@@ -58,7 +58,7 @@ function App() {
   };
 
   const handleLoadMore = () => {
-    setPage(page + 1);
+    setPage(prevPage => prevPage + 1);
   };
 
   function openModal(image) {
@@ -68,6 +68,7 @@ function App() {
 
   function closeModal() {
     setIsOpen(false);
+    setCurrentImage({});
   }
 
   return (
@@ -89,13 +90,11 @@ function App() {
           },
         }}
       />
-      {currentImage && (
-        <ImageModal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          image={currentImage}
-        />
-      )}
+      <ImageModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        image={currentImage}
+      />
     </>
   );
 }

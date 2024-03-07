@@ -1,13 +1,12 @@
 import css from './ImageCard.module.css';
 
-const ImageCard = ({ image, onClick }) => {
+const ImageCard = ({ image: { alt_description, urls, user, likes, description, color }, onClick }) => {
   return (
-    <div className={css.imgWrapper}>
+    <div className={css.imgWrapper} style={{ backgroundColor: color }}>
       <img
-        src={image.urls.small}
-        data-regular={image.regular}
-        alt={image.alt_description}
-        onClick={()=> onClick(image)}
+        src={urls.small}
+        alt={alt_description}
+        onClick={() => onClick({ alt_description, imgUrl: urls.regular, user, likes, description })}
         className={css.img}
       />
     </div>

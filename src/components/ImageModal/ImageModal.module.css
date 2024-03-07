@@ -1,0 +1,29 @@
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .image {
+    height: 70vh;
+  }
+  .thumbInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+  }
+  .user {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .avatar {
+    border-radius: 50%;
+  }
+  
+  .likes {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
