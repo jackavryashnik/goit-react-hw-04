@@ -15,11 +15,11 @@ const customStyles = {
   },
 };
 
-const ImageModal = ({ іsOpen, closeModal, image: {user, description, alt_description, imgUrl , likes} }) => {
+const ImageModal = ({ isOpen, onRequestClose, image: {user, description, alt_description, imgUrl , likes} }) => {
   return (
     <Modal
-      isOpen={іsOpen}
-      onRequestClose={closeModal}
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
       style={customStyles}
     >
       <div className={css.imageWrapper}>
@@ -40,7 +40,7 @@ const ImageModal = ({ іsOpen, closeModal, image: {user, description, alt_descri
         </div>
       </div>
       <div>
-        <p>{description}</p>
+        <p>{description || 'No description here'}</p>
       </div>
     </Modal>
   );
