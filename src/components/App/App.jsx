@@ -4,12 +4,11 @@ import fetchImages from '../../images-api';
 import SearchBar from '../SearchBar/SearchBar';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 import ImageModal from '../ImageModal/ImageModal';
 import ImageGallery from '../ImageGallery/ImageGallery';
 
-const notify = () => toast.error('Enter search query first.');
 
 function App() {
   const [images, setImages] = useState([]);
@@ -22,6 +21,8 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!query) return;
+
       try {
         const results = await fetchImages(query, page, setImages);
         setImages(prevImages => {
@@ -37,24 +38,16 @@ function App() {
     fetchData();
   }, [query, page]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event, inputValue) => {
     event.preventDefault();
 
     setPage(1);
     setImages([]);
     setIsError(false);
+    setIsLoading(true);
+    setQuery(inputValue);
 
-    const form = event.target;
-    const inputValue = form.elements.input.value;
-
-    if (!inputValue.trim()) {
-      notify();
-    } else {
-      setIsLoading(true);
-    }
-
-    setQuery(inputValue.trim().toLowerCase());
-    form.reset();
+    event.target.reset();
   };
 
   const handleLoadMore = () => {
