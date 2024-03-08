@@ -9,7 +9,6 @@ import Loader from '../Loader/Loader';
 import ImageModal from '../ImageModal/ImageModal';
 import ImageGallery from '../ImageGallery/ImageGallery';
 
-
 function App() {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState('');
@@ -38,16 +37,12 @@ function App() {
     fetchData();
   }, [query, page]);
 
-  const handleSubmit = (event, inputValue) => {
-    event.preventDefault();
-
+  const handleSubmit = inputValue => {
     setPage(1);
     setImages([]);
     setIsError(false);
     setIsLoading(true);
     setQuery(inputValue);
-
-    event.target.reset();
   };
 
   const handleLoadMore = () => {

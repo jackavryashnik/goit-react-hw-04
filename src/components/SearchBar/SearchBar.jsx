@@ -5,13 +5,17 @@ const notify = () => toast.error('Enter search query first.');
 
 const SearchBar = ({ onSubmit }) => {
   const hendleSubmit = event => {
+    event.preventDefault();
+
     const form = event.target;
     const inputValue = form.elements.input.value;
-    const treimedValue = inputValue.trim().toLowerCase();
+    const trimedValue = inputValue.trim().toLowerCase();
 
-    if (!treimedValue) notify();
-
-    onSubmit(event, treimedValue);
+    if (!trimedValue) {
+      return notify();
+    }
+    onSubmit(trimedValue);
+    form.reset();
   };
 
   return (
